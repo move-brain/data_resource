@@ -1,9 +1,9 @@
 <template>
     <div ref="tablelength" id="minData">
-        <h2>{{ dataDeclaration.title }} ({{ dataDeclaration.number }})</h2>
+        <h1>{{ dataDeclaration.title }} ({{ dataDeclaration.number }})</h1>
         <el-table  :data="tableData" @row-click="cellClick" :cell-style="showRow" style="width: 100%">
-            <el-table-column prop="dataID" label="字段ID" />
-            <el-table-column prop="describe" label="描述" />
+            <el-table-column prop="id" label="字段ID" />
+            <el-table-column prop="nodeType" label="描述" />
         </el-table>
     </div>
 </template>
@@ -11,24 +11,12 @@
 <script setup>
 import { reactive, ref, onMounted, onUnmounted, nextTick } from 'vue';
 import et from '../bus.js'
-const tableData = reactive([
-{
-    dataID: '190',
-    describe: '失访原因'
-},
-{
-    dataID: '191',
-    describe: '失访日期'
-},
-{
-    dataID: '20005',
-    describe: '电子邮件访问'
-},
-{
-    dataID: '110007',
-    describe: '通讯通讯，发送日期'
-}
-])
+const props=defineProps(
+    {
+        tableData:Array
+    }
+)
+let {tableData}=props
 const dataDeclaration = reactive({
     title: '数据字段',
     number: tableData.length
@@ -58,7 +46,7 @@ const showRow = ({ _, column }) => {
     }
 }
 const cellClick = ( row ) => {
-    et.emit('cellclick',row.dataID)
+    et.emit('cellclick',row)
 }
 </script>
 
@@ -66,15 +54,15 @@ const cellClick = ( row ) => {
 #minData {
     min-width: 27.1vw;
 }
-
 #minData ::v-deep th{
     background-color: #f0f1f5;
     color:black;
-    font-size: 18px;
+    font-size: small;
     height: 60px;
 }
 
 #minData ::v-deep td {
     height: 54px;
+    font-size: small;
 }
 </style>

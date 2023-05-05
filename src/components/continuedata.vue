@@ -14,9 +14,9 @@
           <span class="datades">{{ fixedData.describe }}</span>
           <span class="data">{{ dataDeclaration.describe }}</span>
         </p>
-        <p>
+        <p  style="display: flex;" >
           <span class="datades">{{ fixedData.type }}</span>
-          <span class="data" id="bread"><breadcrumb/></span>
+          <span class="data" style="align-self: center;" id="bread"><breadcrumb/></span>
         </p>
     </header>
     <div id="information">
@@ -280,8 +280,8 @@ header .datades {
 
 #sideNavigationBar {
   position: fixed;
-  top: 11.5vh;
-  right: 13vw;
+  top: 12vh;
+  right: 5vw;
   font-size: 14px;
 }
 

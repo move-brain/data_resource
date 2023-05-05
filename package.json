@@ -14,6 +14,8 @@
     "element-plus": "^2.3.3",
     "mitt": "^3.0.0",
     "path": "^0.12.7",
+    "pinia": "^2.0.35",
+    "pinia-plugin-persist": "^1.0.0",
     "sass": "^1.62.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"

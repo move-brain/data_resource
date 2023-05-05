@@ -11,16 +11,16 @@
   </div>
 </div>
 </template>
-
 <script>
 import * as echarts from "echarts"
 import { onMounted ,onBeforeMount, onBeforeUnmount, ref} from 'vue'
 export default {
     setup() {
-
       onMounted(() => {
           console.log(1111+'kkkkkkk');
-            var chartOne = echarts.init(document.getElementById('chartOne'));
+          let d =document.getElementById('chartOne')
+            var chartOne = echarts.init(d);
+            document.getElementById('chartOne').setAttribute('_echarts_instance_', '')
             chartOne.setOption({
                   title: {
                     text: '折线图',
@@ -33,9 +33,6 @@ export default {
                   tooltip: {
                     trigger: 'axis'
                   },
-                //   legend: {
-                //     data: ['图例1', '图例2', '图例3', '图例4']
-                //   },
                   grid: {
                     left: '3%',
                     right: '4%',
@@ -84,6 +81,7 @@ export default {
             })
 
             var chartTwo = echarts.init(document.getElementById('chartTwo'));
+            document.getElementById('chartTwo').setAttribute('_echarts_instance_', '')
             chartTwo.setOption({
                 title: {
                     text: '柱状图',
@@ -131,6 +129,7 @@ export default {
             })
         
             var chartThree = echarts.init(document.getElementById('chartThree'));
+            document.getElementById('chartThree').setAttribute('_echarts_instance_', '')
             chartThree.setOption({
                   title: {
                     text: '饼状图',
@@ -181,6 +180,7 @@ export default {
             })
         
             var chartFour = echarts.init(document.getElementById('chartFour'));
+            document.getElementById('chartFour').setAttribute('_echarts_instance_', '')
             chartFour.setOption({
                 title: {
                   text: '双轴图',
@@ -257,6 +257,7 @@ export default {
             })
         
             var chartFive = echarts.init(document.getElementById('chartFive'));
+            document.getElementById('chartFive').setAttribute('_echarts_instance_', '')
             chartFive.setOption({
               title: {
                 text: '面积图',
@@ -315,6 +316,7 @@ export default {
             })
         
             var chartSix = echarts.init(document.getElementById('chartSix'));
+            document.getElementById('chartSix').setAttribute('_echarts_instance_', '')
             const dataBJ = [
               [32, 20, 19],
               [34, 7, 4],
@@ -407,18 +409,31 @@ export default {
               ]
             })
         })
-    },
+ //vue3写法
+// const myChart = ref("");
+
+
+// onBeforeUnmount(() => {
+//   console.log(chartOne);
+//   // chartOne = echarts.init(document.getElementById('chartOne'));
+//       if (chartOne) {
+//         // chartOne.clear(); //清空图表
+//         chartOne.dispose(); //释放图表组件
+//       //   chartOne = null;
+//       }
+//     });
+
+      },
 }
 </script>
-
 <style scoped>
   .container {
     margin-top: 40px;
   }
 
-  h1 {
-    font-size: 22px;
-  }
+  /* h2 {
+    font-size: small;
+  } */
 
   .charts {
     display: grid;

@@ -2,8 +2,8 @@
     <div ref="tablelength" id="minData">
         <h2>{{ dataDeclaration.title }} ({{ dataDeclaration.number }})</h2>
         <el-table  :data="minData" @cell-click="cellClick" :cell-style="showRow" style="width: 100%">
-            <el-table-column prop="dataID" label="字段ID" :width="length.w1" />
-            <el-table-column prop="describe" label="描述" :width="length.w2" />
+            <el-table-column prop="id" label="字段ID" :width="length.w1" />
+            <el-table-column prop="description" label="描述" :width="length.w2" />
             <el-table-column prop="relationship" label="关系" :width="length.w3" />
         </el-table>
     </div>

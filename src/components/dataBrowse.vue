@@ -2,14 +2,14 @@
     <div id="body">
         <div id="dataDeclaration">
             <header>
-                <h1>{{ dataDeclaration.title1 }}</h1>
+                <h2>{{ dataDeclaration.title1 }}</h2>
                 <span>{{ dataDeclaration.subtitle1 }}</span>
             </header>
             <p>{{ dataDeclaration.content }}</p>
         </div>
         <div id="Statistics">
             <header>
-                <h1>{{ dataDeclaration.title2 }}</h1>
+                <h2>{{ dataDeclaration.title2 }}</h2>
                 <span>{{ dataDeclaration.subtitle2 }}</span>
             </header>
             <DataStatistics></DataStatistics>
@@ -33,6 +33,7 @@ const dataDeclaration = reactive({
     #body {
         text-align: left;
         width: 100%;
+        font-size: small;
     }
 
     #dataDeclaration {
@@ -43,9 +44,11 @@ const dataDeclaration = reactive({
 
     header {
         display: flex;
+        justify-content: left;
+        align-items: center;
     }
 
-     h1 {
+    h1 {
         font-size: 30px;
         margin: 0;
         white-space:nowrap;

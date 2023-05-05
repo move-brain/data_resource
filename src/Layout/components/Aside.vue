@@ -16,40 +16,38 @@
          @select="selectmenu"
          @close="closemenu"
          unique-opened="true"
-        :default-active="openid"
+        :default-active="openid" 
       >
       <div v-for="(item,index) in sidebarmenu" @click="handleclik(item)" :key="item.id" style="width: 100%;height: 100%;" >
-        <el-sub-menu  v-if="item.children&&item.children.length>0" :class="openid==item.path ? 'activemenu':''"   :index="item.path">
+        <el-sub-menu  v-if="item.nodeType&&item.nodeType=='目录' || item.children&&item.children.length>0" :class="openid==item.id ? 'activemenu':''"   :index="item.id">
           <template #title>
-            <span>{{item.label }}</span>
-          </template>
+            <span>{{item.title }}</span>  
+          </template> 
           <div @click.stop="handleclik(citem)" v-for="(citem,cindex) in item.children" :key="citem.id" >
-            <el-sub-menu  v-if="citem.children&&citem.children.length>0"  :class="openid==citem.path ? 'activemenu':''" :index="citem.path">
-            <template #title>{{ citem.label }}</template>
+            <el-sub-menu  v-if="citem.nodeType&&citem.nodeType=='目录' || citem.children&&citem.children.length>0"  :class="openid==citem.id ? 'activemenu':''" :index="citem.id">
+            <template #title>{{ citem.title }}</template>
             <div  @click.stop="handleclik(ccitem)" v-for="(ccitem,ccindex) in citem.children" :key="ccitem.id" >
-                
-                <el-sub-menu :class="openid==ccitem.path ? 'activemenu':''" :index="ccitem.path" v-if="ccitem.children&&ccitem.children.length>0"  >
-                  <template #title>{{ ccitem.label }}</template>
+                <el-sub-menu :class="openid==ccitem.id ? 'activemenu':''" :index="ccitem.id" v-if="ccitem.nodeType&&ccitem.nodeType=='目录' || ccitem.children&&ccitem.children.length>0"  >
+                  <template #title>{{ ccitem.title }}</template>
                   <div  @click.stop="handleclik(cccitem)" v-for="(cccitem,cccindex) in ccitem.children" :key="cccitem.id" >
-                    <el-sub-menu :class="openid==cccitem.path ? 'activemenu':''" :index="cccitem.path" v-if="cccitem.children&&cccitem.children.length>0"  >
-                      <template #title>{{ cccitem.label }}</template>
+                    <el-sub-menu :class="openid==cccitem.id ? 'activemenu':''" :index="cccitem.id" v-if="cccitem.nodeType&&cccitem.nodeType=='目录' || cccitem.children&&cccitem.children.length>0"  >
+                      <template #title>{{ cccitem.title }}</template>
                       <div  @click.stop="handleclik(ccccitem)" v-for="(ccccitem,ccccindex) in cccitem.children" :key="ccccitem.id" >
-                      <el-menu-item   :class="openid==ccccitem.path ? 'activemenu':''"   :index="ccccitem.path"> <span>{{ ccccitem.label }}</span></el-menu-item></div>
+                      <el-menu-item   :class="openid==ccccitem.id ? 'activemenu':''"   :index="ccccitem.id"> <span>{{ ccccitem.title }}</span></el-menu-item></div>
                </el-sub-menu>
-                    <el-menu-item  v-else :class="openid==cccitem.path ? 'activemenu':''"   :index="cccitem.path"> <span>{{ cccitem.label }}</span></el-menu-item>
-                  </div>
-
+                    <el-menu-item  v-else :class="openid==cccitem.id ? 'activemenu':''"   :index="cccitem.id"> <span>{{ cccitem.title }}</span></el-menu-item>
+                  </div> 
                 </el-sub-menu>
-                <el-menu-item   v-else :class="openid==ccitem.path ? 'activemenu':''"   :index="ccitem.path"> <span>{{ ccitem.label }}</span></el-menu-item>
+                <el-menu-item   v-else :class="openid==ccitem.id ? 'activemenu':''"   :index="ccitem.id"> <span>{{ ccitem.title }}</span></el-menu-item>
             </div>
           </el-sub-menu>
-            <el-menu-item :class="openid==citem.path ? 'activemenu':''"  v-else :index="citem.path" >
-               <span> {{ citem.label }}</span>
+            <el-menu-item :class="openid==citem.id ? 'activemenu':''"  v-else :index="citem.id" >
+               <span> {{ citem.title }}</span>
             </el-menu-item>
           </div>
         </el-sub-menu>
-        <el-menu-item :class="openid==item.path ? 'activemenu':''"   v-else :index="item.path" >
-          <span>{{ item.label }}</span>
+        <el-menu-item :class="openid==item.id ? 'activemenu':''"   v-else :index="item.id" >
+          <span>{{ item.title }}</span>
         </el-menu-item>
       </div>
       </el-menu>
@@ -57,89 +55,87 @@
 </div>
 </template>
 <script setup >
-import { ref,onMounted ,watch} from 'vue'
+import { ref,watch} from 'vue'
 import et from '../../bus'
 import headermenu from '../../config/Layoutmenu/header'
-import {rank,sidebarmenu,sidebarrouters} from '../../config/Layoutmenu/aside.js'
-import { useRouter } from 'vue-router';
+import {rank} from '../../config/Layoutmenu/aside.js'
+import {gettest,getchtest} from '../../api/request'
+import {useDirectoryinfoStore} from '../../store/Directoryinfo'
 let activelabel=ref('')
 let openid=ref("")
-let router=useRouter()
-let iswatch=false
-et.on("headeractiveid",(e)=>{
-      headermenu.forEach((ele)=>{
-        ele.id==e? activelabel.value=ele.label :''
-      })
-})
-et.on("isactiveitem",(e)=>{
-  let skippath=''
-    openid.value=e.path
-    let activeitem=sidebarrouters.filter((item)=>{
-  if (e.path==item.path) {
-    return item
-  }
+let sidebarmenu=ref([])  //显示侧边栏的数组
+let Directoryinfo=useDirectoryinfoStore()     //建立store实例
+let  chmenu=[]   //收集为目录的节点，用于判断是否需要发起请求 
+
+//监听store中的变化,实现侧边栏的激活态
+   watch(()=>Directoryinfo.info,(val,old)=>{
+openid.value=val.data.currentCatalogueBasicInfor.id
+   })
+   // pushchmenu函数 将为目录（即可以展开的侧边栏）的节点添加到chmenu  ，用于判断是否需要再次发起请求
+   let pushchmenu= async (arry)=>{
+  let  newchmenu=arry.filter((item)=>{
+    if (item.nodeType&&item.nodeType=='目录') {
+      return item
+    }
   })
-let breadpathlist=e.path.split('/')
-breadpathlist.shift()
-console.log(activeitem);
-  for(var i=0;i<activeitem[0].meta.rank;i++){
-       skippath+='/'+breadpathlist[i]
-  }
- console.log(skippath);
-
+  newchmenu.forEach(item => {
+  item.isrequest=false;
+});
+  chmenu=chmenu.concat(newchmenu)
+   }
+   //gettest发起请求，获取顶层目录
+  gettest().then( async res=>{ 
+  sidebarmenu.value=res.data.data
+    pushchmenu(res.data.data)
 })
-
+  //创建全局事件    头部菜单的变化
+et.on("headeractiveid",(e)=>{headermenu.forEach((ele)=>{ele.id==e? activelabel.value=ele.label :''})}) 
+//点击侧边栏触发的全局事件   在layout组件执行
 let handleclik=async (event)=>{
- 
-  console.log(222);
-   et.emit("handleclikemenu",event)
+    et.emit("handleclikemenu",event)
 }
-let a=ref("")
-onMounted(()=>{
-  // iswatch=true
-  watch(()=>router.currentRoute.value.matched[1],(val,old)=>{
-  if (!iswatch) {
-    console.log(router.currentRoute.value.matched[1]);
-           console.log(val.path);
-           a=val.path
-           openid.value=val.path
-           console.log(openid.value);
-           console.log(val.path);
+
+ //封装一个函数  递归寻找父元素，然后再将请求获取的子目录添加到其children数组中
+let findElementById= async (data, id,children)=> {
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i]);
+    if (data[i].id == id) {
+      data[i].children=children
+    } else if (data[i].children&&data[i].children.length>0) {
+       data[i].children = await findElementById(data[i].children, id,children);
+    }
   }
-},{immediate:true})
-})
-let openmenu=(e)=>{
-  console.log(e);
+ return data
+}
+//getchmenu里的getchtest发起请求   获取相应子目录   await为js异步语法糖
+ let getchmenu=  async (id)=>{
+  await getchtest(id).then(async res=>{
+        sidebarmenu.value=await findElementById(sidebarmenu.value,id,res.data.data)
+     await pushchmenu(res.data.data)
+  })
+  return
+ }
+ // 目录展开触发的函数 e为目录的id
+ let openmenu= async (e)=>{
+  if (chmenu.find((item)=>item.id==e)!=undefined&&!chmenu.find((item)=>item.id==e).isrequest) {
+    chmenu.find((item)=>item.id==e).isrequest=true
+    await getchmenu(e)   //获取相应的子目录
+  }
   openid.value=e
 }
-watch(()=>openid.value,(val,old)=>{
-  console.log(val,old);
-  console.log(iswatch);
-  if (!iswatch) {
-    console.log(1111);
-    openid.value=router.currentRoute.value.matched[1].path
-  }
-})
+//关闭目录触发的回调
 let closemenu=(e)=>{
-  iswatch=true
-  console.log(iswatch);
-  console.log(e);
   openid.value=' '
 }
 let selectmenu=(e)=>{
-  console.log(e);
   openid.value=e
 }
-// let clickitem=()=>{
-//   openid.value=''
-// }
-// setTimeout(openmenu,3000)
 </script>
 <style lang="scss" scoped >
  ::v-deep .el-sub-menu.activemenu>.el-sub-menu__title:first-child{
   background-color: rgba(2, 126, 152,0.7)  !important;
   color: #000;
-   border-right: 3px solid #027e98 !important;
+  border-right: 3px solid #027e98 !important;
 }
 .el-menu{
   background-color: #f5f7fa !important;

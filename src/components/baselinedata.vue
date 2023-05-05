@@ -15,9 +15,9 @@
           <span class="datades">{{ fixedData.describe }}</span>
           <span class="data">{{ dataDeclaration.describe }}</span>
         </p>
-        <p>
+        <p style="display: flex;" >
           <span class="datades">{{ fixedData.type }}</span>
-          <span class="data" id="bread"><breadcrumb/></span>
+          <!-- <span class="data" style="align-self: center;" id="bread"><breadcrumb/></span> -->
         </p>
         
     </header>
@@ -78,21 +78,23 @@
       <comment :dataComment="dataComment"></comment>
     </div>
     <div id="classComponent">
-      <classdata formtype="notfach" :form="form"></classdata>
+      <classdata formtype="n" :form="siblingFields"></classdata>
     </div>
     <div id="minData">
-      <MinData_3part :minData="minData"></MinData_3part>
+      <MinData_3part :minData="dataform"></MinData_3part>
     </div>
   </div>
 </template>
-
 <script setup>
 import DataShow2 from './DataShow2.vue';
 import comment from './comment.vue';
 import classdata from './classdata.vue';
 import { reactive, onMounted, onUnmounted } from 'vue';
 import MinData_3part from './minData_3part.vue';
-import breadcrumb from '../Layout/components/breadcrumb.vue'
+// import breadcrumb from '../Layout/components/breadcrumb.vue'
+import {usedatafieldStore} from '../store/datafield.js'
+let  datafield=usedatafieldStore()
+console.log(datafield);
 onMounted(() => {
   getTop();
   window.addEventListener('resize', getTop);
@@ -190,23 +192,23 @@ let dataComment = [{
     title: "备注",
     comment: "这是基于出生日期和参与初始评估中心日期的派生变量，是指参与者在参加初始评估中心的当天的年龄，截断为全年。"
 }]
-let form = [
-  {
-    dataID: '100094',
-    describe: '基线特征',
-    number: '6+25'
-},
-{
-    dataID: '1',
-    describe: '人口特征',
-    number: '+35'
-},
-{
-    dataID: '107',
-    describe: '社会人口学',
-    number: '110'
-}
-]
+// let form = [
+//   {
+//     dataID: '100094',
+//     describe: '基线特征',
+//     number: '6+25'
+// },
+// {
+//     dataID: '1',
+//     describe: '人口特征',
+//     number: '+35'
+// },
+// {
+//     dataID: '107',
+//     describe: '社会人口学',
+//     number: '110'
+// }
+// ]
 
 const tit = reactive({
   data:"数据",
@@ -253,12 +255,12 @@ const fixedData = reactive({
   cost: "成本层"
 }) 
 const dataDeclaration = reactive({
-  title: "数据字段 21022",
-  describe: "招聘年龄",
+  title: "数据字段"+datafield.fielddata.currentFieldBasicInfor.id,
+  describe:datafield.fielddata.currentFieldBasicInfor.nodeType ,
   participant: "502,408",
   numericValue: "502,408",
   stability: "固定",
-  valueType: "单个值",
+  valueType:datafield.fielddata.currentFieldBasicInfor.valueTable,
   dataType: "数据",
   level: "衍生",
   sex: "两性",
@@ -268,8 +270,14 @@ const dataDeclaration = reactive({
   versionDate: "2014.07",
   cost: "d1 o1 s1"
 })
-</script>
+let dataform=[]
+const {parents,siblingFields}=datafield.fielddata
+parents.forEach((ele)=>{
+    ele.catalogueDto.childFieldCount=ele.childFieldCount
+    dataform.push(ele.catalogueDto)
+  })
 
+</script>
 <style scoped>
 #body {
     margin-left: 2.2vw;
@@ -277,6 +285,7 @@ const dataDeclaration = reactive({
     text-align: left;
     width: 57vw;
     min-width: 640px;
+    font-size: small;
 }
 
 header {
@@ -332,9 +341,10 @@ header .datades {
 
 #sideNavigationBar {
   position: fixed;
-  top: 11.5vh;
-  right: 13vw;
+  top: 12vh;
+  right: 5vw;
   font-size: 14px;
+  z-index: 10;
 }
 
 #sideNavigationBar div{

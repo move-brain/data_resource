@@ -1,28 +1,38 @@
 <template>
   <el-breadcrumb  :separator-icon="ArrowRight">
-    <el-breadcrumb-item @click="handlebread(item)"  :class="breadlist.length-1==index ? 'breaditem lastitem':'breaditem'" v-for="(item,index) in breadlist" :key="item" :index="index" >{{ item }}</el-breadcrumb-item>
+    <el-breadcrumb-item @click="handlebread(item)"  :class="breadlist.length-1==index ? 'breaditem lastitem':'breaditem'" v-for="(item,index) in breadlist" :key="item" :index="index" >{{ item.title }}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 <script setup >
 import { ArrowRight } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router';
 import et from '../../bus'
-import { computed,watch,ref} from 'vue';
-import {sidebarrouters} from '../../config/Layoutmenu/aside'
-let router=useRouter()
+import { watch,ref} from 'vue';
+import { useDirectoryinfoStore } from '../../store/Directoryinfo';
+import {getallparent}  from "../../api/request"
 let breadlist=ref([])
-
-watch(()=>router.currentRoute.value.matched[1],(val,old)=>{
-     breadlist.value=[]
-let breadpathlist=val.path.split('/')
-breadlist.value.push(val.name)
-breadpathlist.shift()
-for(var i=breadpathlist.length-2;i>=0;i--){
-    sidebarrouters.forEach((ele)=>{
-        if (ele.path=='/'+breadpathlist[i]) {breadlist.value.push(ele.name)}})}
-breadlist.value.reverse()
-},{immediate:true})
-let handlebread=(e)=>{
+let Directoryinfo=useDirectoryinfoStore()
+let Getallparent= async (id)=>{
+ 
+ await getallparent(id).then(res=>{
+    res.data.data.forEach(element => {
+      breadlist.value.push(element)
+    });
+    console.log(breadlist);
+  })
+}
+//具体思路就是监视Directoryinfo中info的变化，如果发生改变就请求其所有的父目录
+watch(()=>Directoryinfo.info, async (val,old)=>{
+  breadlist.value=[]
+  await Getallparent(Directoryinfo.info.data.currentCatalogueBasicInfor.id)
+  breadlist.value.push(val.data.currentCatalogueBasicInfor)
+},{immediate:true})  
+//在layout.vue文件触发
+let handlebread=async (e)=>{
+  // console.log(e); 
+  // breadlist.value=[]
+  // await Getallparent(Directoryinfo.info.data.currentCatalogueBasicInfor.id)
+  // breadlist.value.push(e)
+  // 点击面包屑跳转到其相应的页面  具体函数在layout编写
     et.emit("handlebreaditem",e)
 }
 </script>
