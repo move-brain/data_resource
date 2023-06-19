@@ -19,18 +19,5 @@ export default defineConfig({
         alias: {
             "@": resolve(__dirname, 'src'), // 路径别名
         },
-    }
-
-
-    // devServer: {
-    //     proxy: {
-    //         '/api': {
-    //             target: 'http://127.0.0.1:8080/', //接口域名
-    //             changeOrigin: true, //是否跨域
-    //             pathRewrite: { //路径重置
-    //                 '^/api': ''
-    //             }
-    //         }
-    //     }
-    // }
+    },
 })

@@ -1,37 +1,19 @@
-//get方法可以使用params传参   post可以使用post和params
-// import { id } from 'element-plus/es/locale';
+//get方法只可以使用params传参   post可以使用post和params
 import request from '../axios'
-export let loginsign = (logindata) => {
-    //这里可以进行一些进行一些登录发起前的行为
-    console.log(request);
-    return request({
-        url: '/user/login',
-        method: 'get',
-        // params: { randomStr, code, grant_type, scope },
-        params: logindata
-    })
-}
+//获取顶层目录
 export const gettest = () => {
-    return request({
-        url: '/catalogue/top',
-        method: 'get',
-    })
-}
+        return request({
+            url: '/catalogue/top',
+            method: 'get',
+        })
+    }
+    //获取子目录
 export const getchtest = (id) => {
     return request({
-        url: '/catalogue/childrenCatalogue/',
+        url: '/catalogue/childrenCatalogue/' + id,
         method: 'get',
-        params: { id }
     })
 }
-
-// export const getparentCatalogue = (id) => {
-//     return request({
-//         url: '/catalogue/parentCatalogue',
-//         params: { id },
-//         method: 'get',
-//     })
-// }
 export const getcascadeParentCatalogue = (id) => {
     return request({
         url: '/catalogue/cascadeParentCatalogue',
@@ -46,39 +28,31 @@ export const getfindAllCatalogueByRootId = (id) => {
             params: { id }
         })
     }
-    // export const gettest = () => {
-    //     return request({
-    //         url: '/user/login',
-    //         method: 'post'
-    //     })
-    // }
-    // export const getchtest = () => {
-    //     return request({
-    //         url: '/user/chtest',
-    //         method: 'post'
-    //     })
-    // }
+    //查看目录信息
 export const getoverview = (id) => {
-    return request({
-        url: '/catalogue/catalogue/overview',
-        method: 'get',
-        params: { id }
-    })
-}
+        return request({
+            url: '/catalogue/catalogue/overview',
+            method: 'get',
+            params: { id }
+        })
+    }
+    //获取父目录
 export const getfather = (id) => {
-    return request({
-        url: 'catalogue/parentCatalogue/',
-        method: 'get',
-        params: { id }
-    })
-}
+        return request({
+            url: 'catalogue/parentCatalogue/',
+            method: 'get',
+            params: { id }
+        })
+    }
+    //获取数据字段信息
 export const getdatafield = (id) => {
-    return request({
-        url: '/catalogue/field/overview',
-        method: 'get',
-        params: { id }
-    })
-}
+        return request({
+            url: '/catalogue/field/overview',
+            method: 'get',
+            params: { id }
+        })
+    }
+    //获取全部上层目录
 export const getallparent = (id) => {
     return request({
         url: '/catalogue/cascadeParentCatalogue',

@@ -1,10 +1,10 @@
 <script setup>
 </script>
 <template>
- <router-view></router-view>
+  <Transition>
+ <router-view></router-view></Transition>
 </template>
-
-<style lang="scss" scoped>
+<style lang="scss">
 ::v-deep #app{
     padding: 0px;
 }

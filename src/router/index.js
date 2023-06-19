@@ -1,16 +1,6 @@
-import { createRouter, createWebHashHistory } from "vue-router"
-import { sidebarrouters } from '@/config/Layoutmenu/aside'
-const routes = [
-
-    {
-        path: '/',
-        name: 'layout',
-        redirect: '/dataBrowse',
-        component: () =>
-            import ('../Layout/layout.vue'),
-        children: [...sidebarrouters]
-    },
-]
+import { createRouter, createWebHashHistory, createWebHistory } from "vue-router"
+import { Routerslist } from '@/config/router/index.js'
+const routes = [...Routerslist]
 const router = createRouter({
     history: createWebHashHistory(),
     routes

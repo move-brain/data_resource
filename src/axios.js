@@ -2,9 +2,7 @@ import axios from "axios";
 import { ElMessage } from 'element-plus'
 /** 创建请求实例 */
 function createService() {
-
     const service = axios.create();
-
     service.defaults.baseURL = '/api';
     // service.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     // service.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
@@ -18,7 +16,6 @@ function createService() {
         (error) => Promise.reject(error));
     // 响应拦截
     service.interceptors.response.use((response) => {
-        // apiData 是 API 返回的数据
         return response
     }, (error) => {
         const status = error.status
