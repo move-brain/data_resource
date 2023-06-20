@@ -10,21 +10,30 @@
 <el-col :span="10" :offset="6"  >
 <div class="h-[8vh] max-h-[55px] flex justify-end items-center text-xs" >
 <div class="mr-5" >
-    <el-select v-model="value" class="applySelect"  placeholder="English">
+    <el-select  class="applySelect"  placeholder="English">
     <el-option
       v-for="item in 3"
       :key="item"
       :label="item"
       :value="item"
     />
-  </el-select>
-
+</el-select>
 </div>
 <span class=" mr-5 cursor-pointer hover:text-[#007f99]" >联系我们</span>
-<div style="display: flex;align-items: center;" class=" mr-5"  >
+<div v-if="islogin" style="display: flex;align-items: center;" class=" mr-5"  >
     <div @click="clicklogin" class=" m-2 cursor-pointer hover:text-[#007f99]" >登录</div>
     <div class="line" ></div>
 <div @click="clickregister" class=" m-2  cursor-pointer hover:text-[#007f99]" >注册</div>
+</div>
+<div v-else class="mr-5" >
+    <el-select  class="applySelect"  placeholder="admin">
+    <el-option
+      v-for="item in 2"
+      :key="item"
+      :label="item"
+      :value="item"
+    />
+</el-select>
 </div>
 </div></el-col>
 </el-row>
@@ -32,6 +41,15 @@
 </template>
 <script setup >
  import et from "@/bus"
+ import {useuserinfoStore} from '@/store/userinfo.js'
+import { computed } from "vue";
+let userinfostore=useuserinfoStore()
+ let islogin=computed(()=>{
+    if (userinfostore.userinfo.username=='') {
+        return true
+    }
+return false
+ })
  let clicklogin=()=>{
     console.log(23222);
     et.emit("gologin")

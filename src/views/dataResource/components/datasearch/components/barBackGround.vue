@@ -1,17 +1,17 @@
 <script>
-import datasearch from '@/views/dataResource/components/datasearch/datasearch.vue'
+import datasearchBar from '@/views/dataResource/components/datasearch/components/dataSearchBar.vue'
 export default{
     components:{
-        datasearch
+        datasearchBar
     }
 }
 </script>
 <template>
 <div class="search">
     <div id="background">
-        <div id="title"><strong>数据搜索</strong></div>
+        <div id="title"><strong>数据搜索</strong></div> 
     </div>
-    <datasearch></datasearch>
+    <datasearchBar></datasearchBar>
 </div>
 </template>
 <style scoped>

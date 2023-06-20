@@ -1,6 +1,6 @@
 <template>
 <div class="w-[100%] h-[100%] bg-[#e4e6e9] flex justify-center items-center " >
-<div class="w-[38%] h-[55vh] bg-white rounded-lg flex justify-center items-center min-w-min min-h-min max-w-[420px] max-h-[420px]" >
+<div class="w-[38%] h-[55vh] bg-[#ffffff] rounded-lg flex justify-center items-center min-w-min min-h-min max-w-[420px] max-h-[420px]" >
 <div  class="w-[75%] h-[75%] flex-col ">
 <div class="w-[100%] h-fit flex justify-between items-center" >
     <span class="font-[900] text-xl"  >登录</span>
@@ -50,12 +50,14 @@ import { User ,SetUp} from '@element-plus/icons-vue'
 import {reactive,ref} from 'vue'
 import {useuserinfoStore} from '@/store/userinfo.js'
 import et from '@/bus'
+import {useRouter} from 'vue-router'
+let router=useRouter()
 let loginForm=ref('')
 let userinfostore=useuserinfoStore()
 let loginRules={
     username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min:6, message: '用户名长度最少6位', trigger: 'blur' }
+          { min:3, message: '用户名长度最少3位', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
@@ -73,6 +75,7 @@ let submitform=()=>{
     loginForm.value.validate((valid)=>{
         if(valid){
    userinfostore.Userlogin(form).then((res)=>{
+    router.push({name:"index"})
    //登陆成功后  做的一些动作   比如跳转路由   loading关闭等
    })
         }

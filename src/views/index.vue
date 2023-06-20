@@ -6,9 +6,9 @@
         <div class="header">
             <img :src="img6">
             <div class="description">
-                <h2>{{title}}</h2>
-                <p>{{description1}}</p>
-                <p>{{description2}}</p>
+                <h2 class=" text-xl font-semibold mb-5" >{{title}}</h2>
+                <p class=" text-sm" >{{description1}}</p>
+                <p class=" text-sm" >{{description2}}</p>
             </div>
             
         </div>
@@ -94,7 +94,7 @@ const pic = reactive({
 })
 let clikplatform=(e)=>{
 console.log(e);
-router.push({name:'dataResource'})
+router.push({name:e.pathname})
 }
 
 //处理所有页面的登录跳转

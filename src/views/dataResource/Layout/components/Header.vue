@@ -23,11 +23,23 @@
 <el-col :span="5" >
  <div class="header_right " style="width: 65%; height: 100%; display: flex;justify-content: space-between;align-items: center;margin-right:5% ;margin-left: 25%;" >
 <span class="hover:text-[#007f99]"  @click="gohomepage"  >返回首页</span>
-<div  style="display: flex;align-items: center;width: 50%;justify-content: space-around;" >
+<div  v-if="islogin" style="display: flex;align-items: center;width: 50%;justify-content: space-around;" >
     <div @click="gologin" class="login hover:text-[#007f99]" >登录</div>
     <div  class="line" ></div>
 <div @click="goregister" class="register hover:text-[#007f99]" >注册</div>
 </div>
+<div v-else class="mr-5" >
+    <el-select  class="applySelect"  placeholder="admin">
+    <el-option
+      v-for="item in 2"
+      :key="item"
+      :label="item"
+      :value="item"
+    />
+</el-select>
+</div>
+
+
  </div>
 </el-col>
 </el-row>
@@ -37,9 +49,18 @@
 import et from '@/bus'
 import {onMounted,watch,ref} from 'vue'
 import headermenu from '@/config/Layoutmenu/header.js'
+import {useuserinfoStore} from '@/store/userinfo.js'
+import { computed } from "vue";
 import { useRoute } from 'vue-router';
 const route=useRoute()
 let acid=ref(1)
+let userinfostore=useuserinfoStore()
+ let islogin=computed(()=>{
+    if (userinfostore.userinfo.username=='') {
+        return true
+    }
+return false
+ })
 watch(()=>route.name,(val,old)=>{ 
     console.log(val);
      headermenu.forEach(element => {
@@ -133,4 +154,23 @@ max-height: 55px;
 .el-col{
     height: 100%;
 }
+.all ::v-deep .el-icon.el-select__caret.el-select__icon{
+        color: black;
+    }
+.all ::v-deep .el-select{
+    font-size:small ;
+    color: black !important;
+    --el-select-border-color-hover:none;
+    --el-select-input-focus-border-color: none;
+}
+.all ::v-deep .el-input__wrapper{
+    padding: 0px;
+    box-shadow: none;
+}
+.all ::v-deep input{
+    max-width:50px;
+}
+.all ::v-deep input::placeholder {
+        color: black;
+    }
 </style>

@@ -14,7 +14,7 @@ export default{
 </script>
 <template>
 <div id="searchbar">
-    <input id="search" type="text" placeholder="请输入关键词" /><button id="searchbutton" @click="searchon"><img src="@/assets/searchbotton.svg"></button>
+    <input id="search" type="text" placeholder="请输入关键词" /><button id="searchbutton" @click="searchon"><img   src="@/assets/img/searchbotton.svg"></button>
 </div>
 </template>
 <style scoped>

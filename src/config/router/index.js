@@ -66,8 +66,22 @@ export const Routerslist = [{
     {
         path: '/workbench',
         name: 'workbench',
+        redirect: "workbench/workindex",
         component: () =>
             import ('@/views/workbench/index.vue'),
+        children: [{
+                path: 'workindex',
+                name: 'workindex',
+                component: () =>
+                    import ('@/views/workbench/components/homepage/index.vue'),
+            },
+            {
+                path: 'gowuche',
+                name: 'gowuche',
+                component: () =>
+                    import ('@/views/workbench/components/gowuche/gowuche.vue'),
+            }
+        ]
     }, {
         path: '/intelligentPlatform',
         name: 'intelligentPlatform',
