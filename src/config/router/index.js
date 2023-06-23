@@ -78,8 +78,23 @@ export const Routerslist = [{
             {
                 path: 'gowuche',
                 name: 'gowuche',
+                redirect: "gowuche/unpaid",
                 component: () =>
                     import ('@/views/workbench/components/gowuche/gowuche.vue'),
+                children: [{
+                        path: "unpaid",
+                        name: "unpaid",
+                        component: () =>
+                            import ('@/views/workbench/components/gowuche/unpaidView.vue'),
+                    },
+                    {
+                        path: "/purchaseHistory",
+                        name: "purchaseHistory",
+                        component:
+                            () =>
+                            import ('@/views/workbench/components/gowuche/purchaseHistory.vue'),
+                    }
+                ]
             }
         ]
     }, {

@@ -36,8 +36,8 @@
           <template #content>
     <div class="w-[15.5vw] h-fit  flex justify-start flex-col items-center" >
     <div class="allgo w-[100%] flex justify-start flex-col  items-start text-[#09839d]" >
-    <div ><svgicon class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon><span>最少8个字符</span></div>
-    <div class="h-fit w-fit flex" ><div class="w-[12px] h-[52px] flex flex-col mr-2" ><svgicon class= " w-[12px] h-[12px]" iconName="icon-kongxinduigou" color="#09839d" ></svgicon></div><span class="h-fit" >可使用英文、数字、下划线组合、不
+    <div ><svgicon style="width: 10px; height: 10px;" class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon><span>最少8个字符</span></div>
+    <div class="h-fit w-fit flex" ><div class="w-[12px] h-[52px] flex flex-col mr-2" ><svgicon style="width: 10px; height: 10px;" class= " w-[12px] h-[12px]" iconName="icon-kongxinduigou" color="#09839d" ></svgicon></div><span class="h-fit" >可使用英文、数字、下划线组合、不
     能只有数字或下划线,之须包含英文</span></div>
     </div>
     </div>
@@ -56,9 +56,9 @@
           <template #content>
     <div class="w-fit  h-fit  flex justify-start flex-col items-center" >
     <div class="allgo w-[100%] flex justify-start flex-col  items-start text-[#09839d]" >
-    <div ><svgicon class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>最少8个字符</div>
-    <div><svgicon class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>不能全为数字、字母或特殊符号</div>
-    <div><svgicon class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>数字、字母、特殊字符任意组合</div>
+    <div ><svgicon style="width: 10px; height: 10px;" class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>最少8个字符</div>
+    <div><svgicon style="width: 10px; height: 10px;" class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>不能全为数字、字母或特殊符号</div>
+    <div><svgicon style="width: 10px; height: 10px;" class= "mr-2" iconName="icon-kongxinduigou" color="#09839d" ></svgicon>数字、字母、特殊字符任意组合</div>
     </div>
     </div>
     </template>

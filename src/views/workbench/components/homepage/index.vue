@@ -1,34 +1,5 @@
 <template>
     <div class="w-full  h-[33%] bg-use 2xl:h-[25%] pb-[8vh] " style="min-height: fit-content;"  >
-    <!-- <div class="w-full bg-use h-[8vh] max-h-[55px] relative top-0 box-border px-[1.5%] flex justify-between" >
-    <div class="h-full w-fit flex items-center" >
-    <img class="h-[65%] mr-[1vw]" src="@/assets/图像 5@2x.png" />
-    <span class=" font-black 2xl:text-base text-sm text-[#ffffff]" >工作台</span>
-    </div>
-    <div class="h-full w-fit flex items-center" >
-    <div class="w-[8vw] max-h-[55px] h-full flex items-center" >
-      <svgicon style="height: 45%;width: min-content; cursor: pointer; " className="allsvg" iconName="icon-a-naolingtixingtongzhi" color="#ffffff" ></svgicon>
-      <svgicon @click="clickgowuche" style="height: 45%;width: min-content; cursor: pointer;" iconName="icon-gouwuche1" color="#ffffff"  ></svgicon>
-    </div>
-    <div class=" flex h-full items-center justify-between max-w-fit w-[8vw] ml-5" >
-      <svgicon style="height: 45%;width: 20%; " iconName="icon-touxiangtongyong" color="#ffffff"  ></svgicon>
-      <el-dropdown  >
-        <span class="el-dropdown-link">
-          {{ username }}
-          <el-icon class="el-icon--right">
-            <CaretBottom />
-          </el-icon>
-        </span>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item>Action 1</el-dropdown-item>
-            <el-dropdown-item>Action 2</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-    </div>
-    </div> -->
     <div class="ml-[4.7vw] pt-[3vh]  flex flex-col">
     <span class="text-[#ffffff] text-lg font-black 2xl:text-xl " >{{  username}}，欢迎登录本系统！</span>
     <div class="mt-[2vh] flex flex-col" >

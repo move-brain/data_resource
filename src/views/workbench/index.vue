@@ -1,7 +1,7 @@
 <template>
     <div class="w-full bg-use h-[8vh] max-h-[55px] relative top-0 box-border px-[1.5%] flex justify-between" >
   <div class="h-full w-fit flex items-center" >
-  <img class="h-[65%] mr-[1vw]" src="@/assets/图像 5@2x.png" />
+  <img class="h-[65%] mr-[1vw]" src="@/assets/组 14@2x.png" />
   <span class=" font-black 2xl:text-base text-sm text-[#ffffff]" >工作台</span>
   </div>
   <div class="h-full w-fit flex items-center" >
