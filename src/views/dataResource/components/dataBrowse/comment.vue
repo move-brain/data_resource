@@ -6,29 +6,29 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 const props = defineProps({
-  dataComment:{           //定义props
-      type:Object
-  }
-})
-let dataComment = reactive(props.dataComment)
-
+  dataComment: {
+    //定义props
+    type: Object,
+  },
+});
+let dataComment = reactive(props.dataComment);
 </script>
 
 <style lang="scss" scoped>
 #commentMain {
-    width: 48vw;
-    min-width: 640px;
+  width: 48vw;
+  min-width: 640px;
 }
 
 #comment {
-    border: 2px solid #e8eaec;
-    white-space:pre-wrap;
-    padding-top: 3vh;
-    padding-left: 2.2vw;
-    padding-bottom: 3vh;
-    font-size: 0.7vw;
+  border: 2px solid #e8eaec;
+  white-space: pre-wrap;
+  padding-top: 3vh;
+  padding-left: 2.2vw;
+  padding-bottom: 3vh;
+  font-size: 0.7vw;
 }
 </style>

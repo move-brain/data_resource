@@ -2,7 +2,9 @@
   <el-breadcrumb :separator-icon="ArrowRight">
     <el-breadcrumb-item
       @click="handlebread(item)"
-      :class="breadlist.length - 1 === index ? 'breaditem lastitem' : 'breaditem'"
+      :class="
+        breadlist.length - 1 === index ? 'breaditem lastitem' : 'breaditem'
+      "
       v-for="(item, index) in breadlist"
       :key="item"
       :index="index"
@@ -12,10 +14,10 @@
   </el-breadcrumb>
 </template>
 <script setup>
-import { ArrowRight } from '@element-plus/icons-vue';
-import et from '@/bus';
-import { watch, ref } from 'vue';
-import { useDirectoryinfoStore } from '@/store/Directoryinfo';
+import { ArrowRight } from "@element-plus/icons-vue";
+import et from "@/bus";
+import { watch, ref } from "vue";
+import { useDirectoryinfoStore } from "@/store/Directoryinfo";
 import { getallparent } from "@/api/request";
 
 let breadlist = ref([]);
@@ -27,11 +29,15 @@ async function Getallparent(id) {
   breadlist.value.push(...res.data.data);
 }
 
-watch(() => Directoryinfo.info, async (val, old) => {
-  breadlist.value = [];
-  await Getallparent(Directoryinfo.info.data.currentCatalogueBasicInfor.id);
-  breadlist.value.push(val.data.currentCatalogueBasicInfor);
-}, { immediate: true });
+watch(
+  () => Directoryinfo.info,
+  async (val, old) => {
+    breadlist.value = [];
+    await Getallparent(Directoryinfo.info.data.currentCatalogueBasicInfor.id);
+    breadlist.value.push(val.data.currentCatalogueBasicInfor);
+  },
+  { immediate: true }
+);
 
 function handlebread(e) {
   // 点击面包屑跳转到其相应的页面  具体函数在layout编写
@@ -121,4 +127,3 @@ function handlebread(item) {
   z-index: 1;
 }
 </style> -->
-

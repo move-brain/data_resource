@@ -73,7 +73,7 @@ export const Routerslist = [{
                 path: 'workindex',
                 name: 'workindex',
                 component: () =>
-                    import ('@/views/workbench/components/homepage/index.vue'),
+                    import ('@/views/workbench/components/homepage/orindex.vue'),
             },
             {
                 path: 'gowuche',
@@ -95,13 +95,214 @@ export const Routerslist = [{
                             import ('@/views/workbench/components/gowuche/purchaseHistory.vue'),
                     }
                 ]
+            },
+            {
+                path: 'proManage',
+                name: 'proManage',
+                redirect:"proManage/manage",
+                component: () =>
+                    import ('@/views/workbench/components/proManage/index.vue'),
+                    children:[
+                        {
+                            
+                                path: "manage",
+                                name: "manage",
+                                component:
+                                    () =>
+                                    import ('@/views/workbench/components/proManage/proManage.vue'),
+                            
+                        },
+                        {
+                            path:'applyProject',
+                            name: "applyProject",
+                            component:
+                                () =>
+                                import ('@/views/workbench/components/proManage/applyProject.vue'),
+                        },
+                        {
+                            path: 'applyInformation',
+                            name: 'applyInformation',
+                            // redirect:"applyInformation/itemReport",
+                            component: () => import('@/views/workbench/components/proManage/applyInformation.vue'),
+                            children: [{
+                                path: 'itemReport',
+                                name: 'itemReport',
+                                component: () => import('@/views/workbench/components/proManage/itemReport.vue'),
+                            },{
+                                path: 'publication',
+                                name: 'publication',
+                                component: () => import('@/views/workbench/components/proManage/publication.vue'),
+                            },{
+                                path: 'meetReport',
+                                name: 'meetReport',
+                                component: () => import('@/views/workbench/components/proManage/meetReport.vue'),
+                            },{
+                                path: 'projectResult',
+                                name: 'projectResult',
+                                component: () => import('@/views/workbench/components/proManage/projectResult.vue'),
+                            }]
+                        }
+                    ]
+            },
+            {
+                    path: 'foursidebar',
+                    name: 'foursidebar',
+                    component: () =>
+                        import ('@/views/workbench/components/foursidebar.vue'),
+                        children:[
+                            {
+                                    path: "usercentre",
+                                    name: "usercentre",
+                                    component:
+                                        () =>
+                                        import ('@/views/workbench/components/usercentre/index.vue'),
+                                        children:[
+                                            {
+                                                path: 'basicinformation',
+                                                name: 'basicinformation',
+                                                component: () =>
+                                                    import ('@/views/workbench/components/usercentre/basicinformation.vue'),
+                                            },
+                                            {
+                                                path: 'accessSecurity',
+                                                name: 'accessSecurity',
+                                                component: () =>
+                                                    import ('@/views/workbench/components/usercentre/accessSecurity.vue'),
+                                            },
+                                            {
+                                                path: 'Dataplatform',
+                                                name: 'Dataplatform',
+                                                component: () =>
+                                                    import ('@/views/workbench/components/usercentre/Dataplatform.vue'),
+                                            },
+                                            {
+                                                path: 'subscription',
+                                                name: 'subscription',
+                                                component: () =>
+                                                    import ('@/views/workbench/components/usercentre/subscription.vue'),
+                                            },
+                                        ]
+                            },
+                            {
+                                path: "msgCenter",
+                                name: "msgCenter",
+                                component:
+                                () =>
+                                import ('@/views/workbench/components/msgCenter/index.vue'),
+                            }
+                          
+                        ]
+                
+            },
+            {
+                path:'orfoursidebar',
+                name:'orfoursidebar',
+                component: () =>
+                import ('@/views/workbench/components/orfoursidebar.vue'),
+                children:[
+                    {
+                        path:'personmanage',
+                        name:'personmanage',
+                        component: () =>
+                        import ('@/views/workbench/components/personmanage/personmanage.vue'),
+                    },
+                    {
+                        path:'orapprove',
+                        name:'orapprove',
+                        component: () =>
+                        import ('@/views/workbench/components/orapprove/index.vue'),
+                    }
+                ]
             }
         ]
     }, {
         path: '/intelligentPlatform',
         name: 'intelligentPlatform',
+        redirect:'/intelligentPlatform/Platformhomepage',
         component: () =>
             import ('@/views/intelligentPlatform/index.vue'),
+            children:[
+                {
+                    path:'Platformhomepage',
+                    name:'Platformhomepage',
+                    component:
+                            () =>
+                            import ('@/views/intelligentPlatform/components/homepage/index.vue'),
+                },
+                {
+           path:'specialData',
+            name:'specialData', 
+            redirect:'specialData/libraryManagementView',
+               component:()=>import('@/views/intelligentPlatform/components/specialData/index.vue'),
+               children:[
+                {
+                    path:'libraryManagementView',
+                    name:'libraryManagementView',
+                    redirect:'specialData/libraryManagementView/databaseView',
+                    component:()=>import('@/views/intelligentPlatform/components/specialData/libraryManagementView.vue'),
+                    children:[
+                        {
+                            path:'databaseView',
+                            name:'databaseView',
+                            component:()=>import('@/views/intelligentPlatform/components/specialData/databaseView.vue'),
+                        },
+                        {
+                            path:'tableView',
+                            name:'tableView',
+                            component:()=>import('@/views/intelligentPlatform/components/specialData/tableView.vue'),
+                        },
+                        {
+                            path:'fieldView',
+                            name:'fieldView',
+                            component:()=>import('@/views/intelligentPlatform/components/specialData/databaseView.vue'),
+                        }
+                    ]
+                },
+                {
+                    path:'dataUpdating',
+                    name:'dataUpdating',
+                    component:()=>import('@/views/intelligentPlatform/components/specialData/dataUpdatingView.vue'),
+                }
+               ]
+                },
+                {
+                        path: "dataManage",
+                        name: "dataManage",
+                        redirect:'/intelligentPlatform/dataManage/categoryRegister',
+                        component:
+                            () =>
+                            import ('@/views/intelligentPlatform/components/dataManage/index.vue'),
+                            children:[
+                                {
+                                    path:'catalogAudit',
+                                    name: "catalogAudit",
+                                    component:
+                                        () =>
+                                        import ('@/views/intelligentPlatform/components/dataManage/components/catalogAudit.vue'),
+                                }       ,
+                            {
+                                path:'issue',
+                                name:"issue",
+                                component:
+                                    () =>
+                                    import ('@/views/intelligentPlatform/components/dataManage/components/issue.vue'),
+                            }     ,
+                            {
+                                path:'catalogAudit2',
+                                name:"catalogAudit2",
+                                component:
+                                    () =>
+                                    import ('@/views/intelligentPlatform/components/dataManage/components/catalogAudit2.vue'),
+                            }  ,{
+                                path:'categoryRegister',
+                                name:"categoryRegister",
+                                component:
+                                    () =>
+                                    import ('@/views/intelligentPlatform/components/dataManage/components/categoryRegister.vue'),
+                            }
+                           ]
+                }
+            ]
     }, {
         path: '/user',
         name: 'user',

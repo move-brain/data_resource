@@ -10,8 +10,9 @@ export const gettest = () => {
     //获取子目录
 export const getchtest = (id) => {
     return request({
-        url: '/catalogue/childrenCatalogue/' + id,
+        url: '/catalogue/childrenCatalogue',
         method: 'get',
+        params: { id }
     })
 }
 export const getcascadeParentCatalogue = (id) => {
