@@ -73,7 +73,7 @@ export const Routerslist = [{
                 path: 'workindex',
                 name: 'workindex',
                 component: () =>
-                    import ('@/views/workbench/components/homepage/orindex.vue'),
+                    import ('@/views/workbench/components/homepage/index.vue'),
             },
             {
                 path: 'gowuche',
@@ -124,23 +124,72 @@ export const Routerslist = [{
                             name: 'applyInformation',
                             // redirect:"applyInformation/itemReport",
                             component: () => import('@/views/workbench/components/proManage/applyInformation.vue'),
-                            children: [{
-                                path: 'itemReport',
-                                name: 'itemReport',
-                                component: () => import('@/views/workbench/components/proManage/itemReport.vue'),
+                            children: [
+                            //     {
+                            //     path: 'itemReport',
+                            //     name: 'itemReport',
+                            //     component: () => import('@/views/workbench/components/proManage/itemReport.vue'),
+                            // },{
+                            //     path: 'publication',
+                            //     name: 'publication',
+                            //     component: () => import('@/views/workbench/components/proManage/publication.vue'),
+                            // },{
+                            //     path: 'meetReport',
+                            //     name: 'meetReport',
+                            //     component: () => import('@/views/workbench/components/proManage/meetReport.vue'),
+                            // },{
+                            //     path: 'projectResult',
+                            //     name: 'projectResult',
+                            //     component: () => import('@/views/workbench/components/proManage/projectResult.vue'),
+                            // }
+                            {
+                                path: '/information/applicationInformation',
+                                name: 'applicationInformation',
+                                component: () => import('@/views/workbench/components/proManage/applicationInformation.vue'),
                             },{
-                                path: 'publication',
-                                name: 'publication',
-                                component: () => import('@/views/workbench/components/proManage/publication.vue'),
+                                path: '/information/teamInformation',
+                                name: 'teamInformation',
+                                component: () => import('@/views/workbench/components/proManage/teamInformation.vue'),
                             },{
-                                path: 'meetReport',
-                                name: 'meetReport',
-                                component: () => import('@/views/workbench/components/proManage/meetReport.vue'),
+                                path: '/information/payInfo',
+                                name: 'payInfo',
+                                component: () => import('@/views/workbench/components/proManage/payInfo.vue'),
                             },{
-                                path: 'projectResult',
-                                name: 'projectResult',
-                                component: () => import('@/views/workbench/components/proManage/projectResult.vue'),
-                            }]
+                                path: '/information/updateRequirements',
+                                name: 'updateRequirements',
+                                component: () => import('@/views/workbench/components/proManage/updateRequirements.vue'),
+                            },{
+                                path: '/information/message',
+                                name: 'message',
+                                component: () => import('@/views/workbench/components/proManage/message.vue'),
+                            },{
+                                path: '/information/dataOfInfo',
+                                name: 'dataOfInfo',
+                                component: () => import('@/views/workbench/components/proManage/dataOfInfo.vue'),
+                            },{
+                                path: '/information/processManagement',
+                                name: 'processManagement',
+                                redirect:"/information/processManagement/itemReport",
+                                component: () => import('@/views/workbench/components/proManage/processManagement.vue'),
+                                children: [{
+                                    path: '/information/processManagement/itemReport',
+                                    name: 'itemReport',
+                                    component: () => import('@/views/workbench/components/proManage/itemReport.vue'),
+                                },{
+                                    path: '/information/processManagement/publication',
+                                    name: 'publication',
+                                    component: () => import('@/views/workbench/components/proManage/publication.vue'),
+                                },{
+                                    path: '/information/processManagement/meetReport',
+                                    name: 'meetReport',
+                                    component: () => import('@/views/workbench/components/proManage/meetReport.vue'),
+                                },{
+                                    path: '/information/processManagement/projectResult',
+                                    name: 'projectResult',
+                                    component: () => import('@/views/workbench/components/proManage/projectResult.vue'),
+                                }]
+                            }
+                        ]
                         }
                     ]
             },

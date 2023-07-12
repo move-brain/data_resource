@@ -5,7 +5,7 @@ import { useRoute, useRouter } from "vue-router";
 const $route = useRoute();
 const $router = useRouter();
 const routerlink = (val) => {
-  $router.push({ path: val });
+  $router.push({ name: val });
 };
 const activeName = ref("first");
 const IsRouter = ref("申请信息");
@@ -111,7 +111,7 @@ const killWorker = (index) => {
 <template>
   <div class="main">
     <header>
-      <div id="backButton" @click="routerlink('/')"></div>
+      <div id="backButton" @click="routerlink('manage')"></div>
       申请项目
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="申请信息" name="first"></el-tab-pane>
@@ -124,7 +124,7 @@ const killWorker = (index) => {
       <div class="everyProject">
         <h4 class="subTitle">
           <p>申请信息</p>
-          <div class="onlineHelp" @click="routerlink('/')">
+          <div class="onlineHelp" @click="routerlink('manage')">
             <i class="iconfont">&#xe60c;</i>在线帮助
           </div>
         </h4>
@@ -325,7 +325,7 @@ const killWorker = (index) => {
       <div class="everyProject" style="padding-bottom: 10vh">
         <h4 class="subTitle">
           <p>数据字段选择</p>
-          <div class="onlineHelp" @click="routerlink('/')">
+          <div class="onlineHelp" @click="routerlink('manage')">
             <i class="iconfont">&#xe60c;</i>在线帮助
           </div>
         </h4>
@@ -379,7 +379,7 @@ const killWorker = (index) => {
               >
                 订单编号 {{ item }}
               </div>
-              <div style="color: #2a7c98" @click="routerlink('/')">
+              <div style="color: #2a7c98" @click="routerlink('manage')">
                 <i class="iconfont">&#xe726;</i> 添加数据
               </div>
               <el-button
@@ -454,7 +454,7 @@ const killWorker = (index) => {
           >提交</el-button
         >
         <el-button class="buttonGrey" type="success">保存草稿</el-button>
-        <div @click="routerlink('/')">
+        <div @click="routerlink('manage')">
           <el-button class="buttonGrey" type="success">退出</el-button>
         </div>
       </div>
@@ -691,7 +691,7 @@ const killWorker = (index) => {
             @click="IsSubmit++"
             >提交</el-button
           >
-          <div @click="routerlink('/')">
+          <div @click="routerlink('manage')">
             <el-button
               class="buttonGrey"
               style="margin: 10px; width: 60px"

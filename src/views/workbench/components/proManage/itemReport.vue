@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref, onMounted, onUnmounted, nextTick } from "vue";
-import { events } from "../bus";
+import et from "@/bus";
 import { useRoute, useRouter } from "vue-router";
 import minDataPart from "./DataPart.vue";
 const $route = useRoute();
@@ -61,7 +61,7 @@ const getWidth = () => {
     length.w5 = tablelength.value.clientWidth * 0.3;
   });
 };
-events.on("test", (e) => {
+et.on("test", (e) => {
   console.log(e);
 });
 const showRow = ({ _, column }) => {

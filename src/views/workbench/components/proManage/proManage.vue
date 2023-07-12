@@ -5,7 +5,7 @@ import { useRoute, useRouter } from "vue-router";
 const $route = useRoute();
 const $router = useRouter();
 const routerlink = () => {
-  $router.push({ path: "/application" });
+  $router.push({ name: "applyProject" });
 };
 </script>
 

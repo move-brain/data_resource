@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref, onMounted, onUnmounted, nextTick, computed } from "vue";
-import { events } from "../bus";
+import et from "@/bus";
 import { useRoute, useRouter } from "vue-router";
 import minDataPart from "./DataPart.vue";
 const $route = useRoute();
